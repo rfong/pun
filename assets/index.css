@@ -1,5 +1,6 @@
 body {
-  padding: 3em;
+  padding: 1em;
+  padding-top: 3em;
   background-color: #f9f9f9; }
 
 body, input {
@@ -18,7 +19,8 @@ input {
   padding: 0.6em 0.3em; }
 
 h1 {
-  margin: 0; }
+  margin: 0;
+  font-size: 24px; }
 
 .button {
   cursor: pointer;

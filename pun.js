@@ -18,6 +18,7 @@ app.controller('PunCtrl', function($scope, $http) {
       $scope.setDefault($scope.reverseIpa, ipaValue, []);
       $scope.reverseIpa[ipaValue].push(word);
     });
+    //$scope.ipaSubstringTrie = new SubstringTrie($scope.ipaValues);
   });
   $.getJSON('assets/ipaVowels.json',function(data){
     $scope.ipaVowels = data.ipaVowels;
@@ -40,8 +41,11 @@ app.controller('PunCtrl', function($scope, $http) {
       _.filter($scope.ipaValues, function(ipa) {
         return ipa.includes(ipaQuery);
       })
+      //$scope.ipaSubstringTrie.lookup(ipaQuery)
     );
-    // todo: compare lookup speed with trie instead of filter
+    // Note: using a substring trie lookup instead of a filter drops most
+    // queries from 60ms to 6ms, but the initial construction takes 1.5s
+    // and freezes the browser pretty bad.
   };
 
   $scope.ipasToWords = function(ipas) {

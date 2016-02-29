@@ -37,7 +37,7 @@ app.controller('PunCtrl', function($scope, $http) {
 
   $scope.getPhoneticSuperstrings = function(ipaQuery) {
     return $scope.ipasToWords(
-      _.filter(_.values($scope.ipa), function(ipa) {
+      _.filter($scope.ipaValues, function(ipa) {
         return ipa.includes(ipaQuery);
       })
     );

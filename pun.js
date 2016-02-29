@@ -19,6 +19,7 @@ app.controller('PunCtrl', function($scope, $http) {
       $scope.reverseIpa[ipaValue].push(word);
     });
     //$scope.ipaSubstringTrie = new SubstringTrie($scope.ipaValues);
+    //console.log(JSON.stringify($scope.ipaSubstringTrie));
   });
   $.getJSON('assets/ipaVowels.json',function(data){
     $scope.ipaVowels = data.ipaVowels;
@@ -72,8 +73,8 @@ app.controller('PunCtrl', function($scope, $http) {
       .uniq()
       .value()
     ).sort();
-    $scope.error = undefined;
-    console.log($scope.query, performance.now() - time);
+    $scope.error = ($scope.results.length == 0) ? "No matches found" : undefined;
+    console.log($scope.query, $scope.results, performance.now() - time);
   };
 
   // vowel substitutions

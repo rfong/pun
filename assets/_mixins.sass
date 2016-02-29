@@ -1,0 +1,31 @@
+=button
+  cursor: pointer
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif
+  text-decoration: none
+  letter-spacing: 2px
+  text-shadow: none
+
+  display: inline-block
+  vertical-align: middle
+  padding: 0.5em 20px
+  margin: 0.5em 0
+
+  +transition(background-color 0.2s)
+  +border-radius(5px)
+
+  outline: none
+  border-style: none
+
+=border-radius($r)
+  -webkit-border-radius: $r
+  -moz-border-radius: $r
+  -ms-border-radius: $r
+  -o-border-radius: $r
+  border-radius: $r
+
+=transition($prop:0.2s)
+  -moz-transition: #{$prop}
+  -ms-transition: #{$prop}
+  -webkit-transition: #{$prop}
+  -o-transition: #{$prop}
+  transition: #{$prop}

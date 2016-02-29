@@ -1,0 +1,49 @@
+<html ng-app="PunApp"
+      ng-controller="PunCtrl">
+<head>
+
+  <!-- Vendor styles -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="lib/bootstrap-grid.css" />
+
+  <!-- Page styles -->
+  <link rel="stylesheet" href="assets/pun.css" />
+
+  <!-- Vendor scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.min.js"></script>
+
+  <!-- Page scripts --> 
+  <script type="text/javascript" src="pun.js"></script>
+
+</head>
+<body>
+
+  <div class="row label">
+    <h1><i class="fa fa-child"></i> Pun Assistinator <i class="fa fa-child"></i></h1>
+    <p>let's find some words that sound kinda like other words</p>
+  </div>
+
+  <div class="row">
+    <input type="text" placeholder="what's it gonna be"
+           ng-model="query"
+           ng-keypress="callOnEnter(makeQuery, $event)" />
+  </div>
+
+  <div id="results" class="row">
+    <div ng-repeat="result in results"
+         class="col-xs-12"
+         ng-class="{'col-sm-4': results.length >= 9}">
+      {{result}}
+    </div>
+  </div>
+  <div ng-if="error" class="error">
+    {{error}}
+  </div>
+  <div ng-if="results === []">
+    No matches found
+  </div>
+
+</body>
+</html>

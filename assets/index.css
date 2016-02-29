@@ -43,6 +43,12 @@ h1 {
   outline: none;
   border-style: none; }
 
+.query-button {
+  background-color: #d5e8c3;
+  width: 120px; }
+  .query-button:hover {
+    background-color: #f54e3c; }
+
 .label, .error {
   text-transform: uppercase;
   font-size: 14px;
@@ -56,4 +62,4 @@ h1 {
 .row {
   margin-bottom: 1em; }
 
-/*# sourceMappingURL=pun.css.map */
+/*# sourceMappingURL=index.css.map */

@@ -4,9 +4,20 @@ var app = angular.module('PunApp', []);
 app.controller('PunCtrl', function($scope, $http) {
   $scope.results = [];
 
+  // Set default value at hash[key] if it does not exist.
+  $scope.setDefault = function(hash, key, defaultValue) {
+    hash[key] = _.isUndefined(hash[key]) ? defaultValue : hash[key];
+  };
+
   $.getJSON('assets/ipa.json',function(data){
     $scope.ipa = data;
     $scope.words = _.keys($scope.ipa);
+    $scope.ipaValues = _.values($scope.ipa);
+    $scope.reverseIpa = {};
+    _.each($scope.ipa, function(ipaValue, word) {
+      $scope.setDefault($scope.reverseIpa, ipaValue, []);
+      $scope.reverseIpa[ipaValue].push(word);
+    });
   });
   $.getJSON('assets/ipaVowels.json',function(data){
     $scope.ipaVowels = data.ipaVowels;
@@ -34,10 +45,11 @@ app.controller('PunCtrl', function($scope, $http) {
   };
 
   $scope.ipasToWords = function(ipas) {
-    return _.filter($scope.words, function(word) {
-      return _.contains(ipas, $scope.ipa[word]);
-    });
-    // todo: probably faster to store a reverse lookup
+    return (_.chain(ipas)
+      .map(function(ipa) { return $scope.reverseIpa[ipa] || [] })
+      .flatten()
+      .uniq()
+    ).value();
   };
 
   $scope.makeQuery = function() {
@@ -46,6 +58,7 @@ app.controller('PunCtrl', function($scope, $http) {
       $scope.error = 'pronunciation not found';
       return;
     }
+    var time = performance.now();
     $scope.results = (
       _.chain($scope.getSimilar($scope.query))
       .map(function(query) {
@@ -56,6 +69,7 @@ app.controller('PunCtrl', function($scope, $http) {
       .value()
     ).sort();
     $scope.error = undefined;
+    console.log($scope.query, performance.now() - time);
   };
 
   // vowel substitutions
